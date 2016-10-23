@@ -1,4 +1,4 @@
-package hello;
+package com.abi.model;
 
 public class Greeting {
 
