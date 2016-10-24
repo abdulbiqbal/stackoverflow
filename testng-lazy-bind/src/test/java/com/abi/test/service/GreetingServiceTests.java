@@ -3,11 +3,13 @@ package com.abi.test.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import javax.transaction.Transactional;
+
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import com.abi.model.Greeting;
@@ -17,7 +19,7 @@ import com.abi.service.InviteeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ServiceTests extends AbstractTestNGSpringContextTests  {
+public class GreetingServiceTests extends AbstractTransactionalTestNGSpringContextTests  {
 
 	@Autowired
 	GreetingService greetingService;
@@ -26,6 +28,7 @@ public class ServiceTests extends AbstractTestNGSpringContextTests  {
 	InviteeService inviteeService;
 
     @Test
+    //@Transactional
     public void testGreetingService() {
     	assertThat(greetingService).isNotNull();
     	assertThat(inviteeService).isNotNull();
