@@ -1,11 +1,13 @@
 package com.abi.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,8 +19,8 @@ public class Greeting {
 	
     private String content;
     
-    @OneToMany
-    private List<Invitee> invitees;
+    @ManyToMany
+    private List<Invitee> invitees = new ArrayList<Invitee>();
     
     public Greeting(){
     	super();

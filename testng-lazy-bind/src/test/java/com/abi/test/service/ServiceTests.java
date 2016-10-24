@@ -11,26 +11,39 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import com.abi.model.Greeting;
+import com.abi.model.Invitee;
 import com.abi.service.GreetingService;
+import com.abi.service.InviteeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class GreetingServiceTests extends AbstractTestNGSpringContextTests  {
+public class ServiceTests extends AbstractTestNGSpringContextTests  {
 
 	@Autowired
 	GreetingService greetingService;
+	
+	@Autowired
+	InviteeService inviteeService;
 
     @Test
-    public void testService() {
+    public void testGreetingService() {
     	assertThat(greetingService).isNotNull();
+    	assertThat(inviteeService).isNotNull();
     	
-    	Greeting test1 = greetingService.create("Test");
+    	Greeting greeting1 = greetingService.create("Test Greeting");
     	
-    	assertThat(test1).isNotNull();
+    	assertThat(greeting1).isNotNull();
     	
-    	Greeting test2 = greetingService.get(test1.getId());
+    	Invitee invitee1 = inviteeService.create("Test Invitee");    	
     	
-    	assertThat(test2).isNotNull();    	
+    	greeting1.getInvitees().add(invitee1);
+    	greeting1 = greetingService.update(greeting1);
+    	
+    	Greeting greeting2 = greetingService.get(greeting1.getId());
+    	
+    	assertThat(greeting2).isNotNull();  
+    	
+    	assertThat(greeting2.getInvitees().isEmpty()).isFalse();
     	
         
     }
