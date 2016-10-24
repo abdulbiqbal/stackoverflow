@@ -39,14 +39,18 @@ public class GreetingServiceTests extends AbstractTransactionalTestNGSpringConte
     	
     	Invitee invitee1 = inviteeService.create("Test Invitee");    	
     	
-    	greeting1.getInvitees().add(invitee1);
-    	greeting1 = greetingService.update(greeting1);
+    	//greeting1.getInvitees().add(invitee1);
+    	//greeting1 = greetingService.update(greeting1);
     	
     	Greeting greeting2 = greetingService.get(greeting1.getId());
     	
     	assertThat(greeting2).isNotNull();  
     	
-    	assertThat(greeting2.getInvitees().isEmpty()).isFalse();
+    	//assertThat(greeting2.getInvitees().isEmpty()).isFalse();
+    	
+    	greetingService.addInvitee(greeting2, invitee1);
+    	
+    	assertThat(greetingService.getInvitees(greeting2).isEmpty()).isFalse();
     	
         
     }

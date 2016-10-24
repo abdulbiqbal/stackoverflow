@@ -1,5 +1,6 @@
 package com.abi.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ public class Invitee {
 	String email;
 	
 	@ManyToMany(mappedBy = "invitees")
-    private List<Greeting> greetings;
+    private List<Greeting> greetings = new ArrayList<Greeting>();
 	
 	public Invitee(){
 		super();
@@ -28,6 +29,14 @@ public class Invitee {
 	public Invitee(String name){
 		super();
 		this.name = name;
+	}
+
+	public List<Greeting> getGreetings() {
+		return greetings;
+	}
+
+	public void setGreetings(List<Greeting> greetings) {
+		this.greetings = greetings;
 	}
 
 }
